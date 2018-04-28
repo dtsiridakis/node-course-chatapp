@@ -13,16 +13,28 @@ const io = socketIO(server); // We pass the server that we want to use.
 
 app.use(express.static(publicPath));
 
-//Register a an event listener for a new connection with a client
+
+// Register a BUILT IN "listen event" for a new connection with a client
 io.on('connection', (socket) => {
 	console.log('New user connected');
 
+// Register a CUSTOM "emit event" to send to our client
+ 	socket.emit('newMessage', {
+ 		from: 'james',
+ 		text: 'Are you here ?',
+ 		createdAt: 123
+ 	});
+
+// Register a CUSTOM 'listen event' from pure created data from client's
+	socket.on('createMessage', (newMessage) => {
+		console.log('createMessage', newMessage);
+	});
+
+// Register a BUILT IN "listen event" when the client log's out.
 	socket.on('disconnect', () => {
 		console.log('User disconnected');
 	});
 });
-
-
 
 
 server.listen(port, () => { // Instead app.listen 
