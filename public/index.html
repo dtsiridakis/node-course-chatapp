@@ -7,4 +7,18 @@
 	<body>
 		<p>Welcome to chat app</p>
 	</body>
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+		var socket = io(); // This method comes from the above library initiates a new web socket persistent open connection.
+		// Register a an event listener for a new connection from the client side.
+
+		socket.on('connect', () => { //We dont' pass any argument
+			console.log('Connected to server');
+		});
+
+		socket.on('disconnect', () => {
+			console.log('Disconnected from server');
+		});
+
+	</script>
 </html>
