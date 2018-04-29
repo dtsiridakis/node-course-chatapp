@@ -5,10 +5,10 @@ socket.on('connect', function () { //We dont' pass any argument
 	console.log('Connected to server');
 
 // Register a BUILT IN "emit event" when the client creates data.
-	socket.emit('createMessage', {
-		from: 'Mara',
-		text: 'Yes i am available!',
-	});
+	// socket.emit('createMessage', {
+	// 	from: 'Mara',
+	// 	text: 'Yes i am available!',
+	// });
 });
 
 // Register a BUILT IN "listen event" when server is down.

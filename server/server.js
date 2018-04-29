@@ -19,15 +19,22 @@ io.on('connection', (socket) => {
 	console.log('New user connected');
 
 // Register a CUSTOM "emit event" to send to our client
- 	socket.emit('newMessage', {
- 		from: 'james',
- 		text: 'Are you here ?',
- 		createdAt: 123
- 	});
+ 	// socket.emit('newMessage', {
+ 	// 	from: 'james',
+ 	// 	text: 'Are you here ?',
+ 	// 	createdAt: 123
+ 	// });
 
 // Register a CUSTOM 'listen event' from pure created data from client's
-	socket.on('createMessage', (newMessage) => {
-		console.log('createMessage', newMessage);
+	socket.on('createMessage', (message) => {
+		console.log('createMessage', message);
+//Here the Server listen's everyone connection.
+//Let's now send to every connection the data we received from someone
+		io.emit('newMessage', {
+			from: message.from,
+			text: message.text,
+			createdAt: new Date().getTime()
+		});
 	});
 
 // Register a BUILT IN "listen event" when the client log's out.
