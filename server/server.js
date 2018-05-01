@@ -33,11 +33,12 @@ io.on('connection', (socket) => {
  	// });
 
 // Register a CUSTOM 'listen event' from pure created data from client's
-	socket.on('createMessage', (message) => {
+	socket.on('createMessage', (message, callback) => {
 		console.log('createMessage', message);
 //Here the Server listen's everyone connection.
 //Let's now send to every connection the data ALSO AND SAME CLIENT WHO CREATES IT
 		io.emit('newMessage', generateMessage(message.from, message.text));
+		callback('From the server');
 //Let's now send to every connection the data WITHOUT CLIENT WHO CREATES IT!
 		// socket.broadcast.emit('newMessage', {
 		// 	from: message.from,

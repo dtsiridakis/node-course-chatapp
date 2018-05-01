@@ -19,6 +19,17 @@ socket.on('disconnect', function () {
 //Register a custom 'listen event' when server sends data
 socket.on('newMessage', function (message) {
 	console.log('You have new message', message);
+
+	var li = $('<li></li>').text(`${message.from}: ${message.text}`);
+	$('#messages').append(li);
 });
 
+//jQuery DOM manip. with submit event listener and event arg.
+$('#message-form').submit(function (event) {
+	event.preventDefault();
 
+	socket.emit('createMessage', {
+		from: 'User',
+		text: $('[name="message"]').val(), // We select via input attribute
+	}, function () {}); // Aknowledgement setup
+});
