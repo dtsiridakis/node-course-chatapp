@@ -3,7 +3,7 @@ const express           = require('express');
 const socketIO          = require('socket.io');
 const http              = require('http');
 
-const {generateMessage} = require('./utils/message');
+const {generateMessage, generateLocationMessage} = require('./utils/message');
 
 //We  shorten the path with the above method
 const publicPath        = path.join(__dirname + '/../public');
@@ -25,12 +25,6 @@ io.on('connection', (socket) => {
 	// //socket.broadcast.emit from: Admin text: New user joint
 	socket.broadcast.emit('newMessage', generateMessage('Admin', 'New user joined'));
 
-// Register a CUSTOM "emit event" to send to our client
- 	// socket.emit('newMessage', {
- 	// 	from: 'james',
- 	// 	text: 'Are you here ?',
- 	// 	createdAt: 123
- 	// });
 
 // Register a CUSTOM 'listen event' from pure created data from client's
 	socket.on('createMessage', (message, callback) => {
@@ -39,12 +33,10 @@ io.on('connection', (socket) => {
 //Let's now send to every connection the data ALSO AND SAME CLIENT WHO CREATES IT
 		io.emit('newMessage', generateMessage(message.from, message.text));
 		callback('From the server');
-//Let's now send to every connection the data WITHOUT CLIENT WHO CREATES IT!
-		// socket.broadcast.emit('newMessage', {
-		// 	from: message.from,
-		// 	text: message.text,
-		// 	createdAt: new Date().getTime()
-		// });
+	});
+
+	socket.on('createLocationMessage', (coords) => {
+		io.emit('newLocationMessage', generateLocationMessage('Admin', coords.latitude, coords.longitude));
 	});
 
 // Register a BUILT IN "listen event" when the client log's out.

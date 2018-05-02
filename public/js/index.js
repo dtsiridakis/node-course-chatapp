@@ -24,6 +24,18 @@ socket.on('newMessage', function (message) {
 	$('#messages').append(li);
 });
 
+//Register a custom 'listen event' when server sends data
+socket.on('newLocationMessage', function (locationMessage) {
+	var li = $('<li></li>');
+	var a = $('<a target= "_blank">Check my location</a>');
+
+	li.text(`${locationMessage.from}: `);
+	a.attr('href', locationMessage.url);
+	li.append(a);
+
+	$('#messages').append(li);
+});
+
 //jQuery DOM manip. with submit event listener and event arg.
 $('#message-form').submit(function (event) {
 	event.preventDefault();
@@ -33,3 +45,24 @@ $('#message-form').submit(function (event) {
 		text: $('[name="message"]').val(), // We select via input attribute
 	}, function () {}); // Aknowledgement setup
 });
+
+//jQuery DOM manip. to set the geolocation button
+var locationButton = $('#send-location');
+
+locationButton.on('click', function () {
+	if(!navigator.geolocation) { // Global on all browser the geolocation object
+		return alert('Your Browser is not supported by your browser');
+	}
+
+	// This function takes 2 functions as args for success and handling according MDN docs.
+	navigator.geolocation.getCurrentPosition(function (position) {
+		// console.log(position);
+		socket.emit('createLocationMessage', {
+			latitude: position.coords.latitude,
+			longitude: position.coords.longitude
+		});
+	}, function () {
+		alert('Unable to fetch location');
+	});
+});
+
