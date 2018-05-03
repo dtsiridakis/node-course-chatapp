@@ -40,10 +40,13 @@ socket.on('newLocationMessage', function (locationMessage) {
 $('#message-form').submit(function (event) {
 	event.preventDefault();
 
+	var messageTextbox = $('[name="message"]');
 	socket.emit('createMessage', {
 		from: 'User',
-		text: $('[name="message"]').val(), // We select via input attribute
-	}, function () {}); // Aknowledgement setup
+		text: messageTextbox.val(), // We select via input attribute
+	}, function () {  // Aknowledgement 
+		messageTextbox.val('');
+	});
 });
 
 //jQuery DOM manip. to set the geolocation button
@@ -54,14 +57,16 @@ locationButton.on('click', function () {
 		return alert('Your Browser is not supported by your browser');
 	}
 
+	locationButton.attr('disabled', 'disabled').text('Sending location...');
 	// This function takes 2 functions as args for success and handling according MDN docs.
 	navigator.geolocation.getCurrentPosition(function (position) {
-		// console.log(position);
+		locationButton.removeAttr('disabled').text('Send location');
 		socket.emit('createLocationMessage', {
 			latitude: position.coords.latitude,
 			longitude: position.coords.longitude
 		});
 	}, function () {
+		locationButton.attr('disabled', 'disabled');
 		alert('Unable to fetch location');
 	});
 });
