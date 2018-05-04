@@ -18,18 +18,19 @@ socket.on('disconnect', function () {
 
 //Register a custom 'listen event' when server sends data
 socket.on('newMessage', function (message) {
-	console.log('You have new message', message);
+	var formattedTime = moment(message.createdAt).format('HH:mm');
 
-	var li = $('<li></li>').text(`${message.from}: ${message.text}`);
+	var li = $('<li></li>').text(`${message.from} ${formattedTime}: ${message.text}`);
 	$('#messages').append(li);
 });
 
 //Register a custom 'listen event' when server sends data
 socket.on('newLocationMessage', function (locationMessage) {
+	var formattedTime = moment(locationMessage.createdAt).format('HH:mm');
 	var li = $('<li></li>');
 	var a = $('<a target= "_blank">Check my location</a>');
 
-	li.text(`${locationMessage.from}: `);
+	li.text(`${locationMessage.from} ${formattedTime}: `);
 	a.attr('href', locationMessage.url);
 	li.append(a);
 
