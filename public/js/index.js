@@ -1,5 +1,25 @@
 var socket = io(); // This method comes from the above library initiates a new web socket persistent open connection.
-		
+
+// Custom Scrolling function
+function scrollToBottom () {
+	//Selectors
+	var messages   = $('#messages'); // The order list
+	var newMessage = messages.children('li:last-child');
+	//Heights
+	var clientHeight = messages.prop('clientHeight');
+	var scrollTop = messages.prop('scrollTop');
+	var scrollHeight = messages.prop('scrollHeight');
+	var newMessageHeight = newMessage.innerHeight();
+	//.prev() selects the previews of this
+	var lastMessageHeight = newMessage.prev().innerHeight();
+
+	if(clientHeight + scrollTop + newMessageHeight + lastMessageHeight >= scrollHeight) {
+		messages.scrollTop(scrollHeight);
+	}
+};
+
+
+
 // Register a BUILT IN "listen event" for a new connection from the client side.
 socket.on('connect', function () { //We dont' pass any argument
 	console.log('Connected to server');
@@ -19,7 +39,7 @@ socket.on('disconnect', function () {
 //Register a custom 'listen event' when server sends data
 socket.on('newMessage', function (message) {
 	var formattedTime = moment(message.createdAt).format('HH:mm');
-	// Selecting the script template
+	// Selecting the script template and keep the html files
 	var template = $('#message-template').html();
 	// Use it on Moustache method
 	var html = Mustache.render(template, {
@@ -29,6 +49,7 @@ socket.on('newMessage', function (message) {
 	});
 
 	$('#messages').append(html);
+	scrollToBottom();
 
 
 	// var formattedTime = moment(message.createdAt).format('HH:mm');
@@ -50,6 +71,7 @@ socket.on('newLocationMessage', function (locationMessage) {
 	});
 
 	$('#messages').append(html);
+	scrollToBottom();
 
 	// var li = $('<li></li>');
 	// var a = $('<a target= "_blank">Check my location</a>');
