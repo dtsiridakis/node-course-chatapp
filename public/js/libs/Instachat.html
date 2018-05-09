@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)http://localhost:3000/chat.html?name=DImi&room=1 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+		<title>Instachat</title>
+		<link rel="stylesheet" href="./Instachat_files/styles.css">
+	</head>
+	<body class="chat">
+
+		<div class="chat__sidebar">
+			<h3>People</h3>
+			<div id="users"><ul><li>DImi</li></ul></div>
+		</div>
+
+		<div class="chat__main">
+			<ol id="messages" class="chat__messages">
+			
+			<li class="message">
+				<div class="message__title">
+					<h4>Admin</h4>
+					<span>14:31</span>
+				</div>
+
+				<div class="message__body">
+					<p>Welcome to the Chat app</p>
+				</div>
+			</li>
+
+		</ol>
+			<div class="chat__footer">
+				<form id="message-form">
+					<input type="text" name="message" placeholder="Write your message" autofocus="" autocomplete="off">
+					<button>Send</button>
+				</form>
+				<button id="send-location">Send location</button>
+			</div>
+		</div>
+
+		<script id="message-template" type="text/template">
+			
+			<li class="message">
+				<div class="message__title">
+					<h4>{{from}}</h4>
+					<span>{{createdAt}}</span>
+				</div>
+
+				<div class="message__body">
+					<p>{{text}}</p>
+				</div>
+			</li>
+
+		</script>
+
+		<script id="location-message-template" type="text/template">
+			
+			<li class="message">
+				<div class="message__title">
+					<h4>{{from}}</h4>
+					<span>{{createdAt}}</span>
+				</div>
+				
+				<div class="message__body">
+					<p><a href="{{url}}" target="_blank">My location</a></p>
+				</div>
+			</li>
+
+		</script>
+
+		<script src="./Instachat_files/jquery-3.3.1.min.js"></script>
+		<script src="./Instachat_files/socket.io.js"></script>
+		<script src="./Instachat_files/moment.js"></script>
+		<script src="./Instachat_files/mustache.min.js"></script>
+		<script src="./Instachat_files/chat.js"></script>
+
+	
+</body></html>

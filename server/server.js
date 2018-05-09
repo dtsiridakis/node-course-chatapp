@@ -49,14 +49,22 @@ io.on('connection', (socket) => {
 
 // Register a CUSTOM 'listen event' from pure created data from client's
 	socket.on('createMessage', (message, callback) => {
-//Here the Server listen's everyone connection.
-//Let's now send to every connection the data ALSO AND SAME CLIENT WHO CREATES IT
-		io.emit('newMessage', generateMessage(message.from, message.text));
+		var user = users.getUser(socket.id);
+
+		if(user && isRealString(message.text)) {
+			io.to(user.room).emit('newMessage', generateMessage(user.name, message.text));
+		}
+//Here the Server listen's everyones connection.
+//Let's now send to room connection 
 		callback();
 	});
 
 	socket.on('createLocationMessage', (coords) => {
-		io.emit('newLocationMessage', generateLocationMessage('Admin', coords.latitude, coords.longitude));
+		var user = users.getUser(socket.id);
+
+		if(user) {
+			io.to(user.room).emit('newLocationMessage', generateLocationMessage(user.name, coords.latitude, coords.longitude));
+		}
 	});
 
 // Register a BUILT IN "listen event" when the client log's out.

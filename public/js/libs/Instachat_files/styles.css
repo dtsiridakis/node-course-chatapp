@@ -119,8 +119,8 @@ button:disabled {
 }
 
 .chat__sidebar li {
-  background: #fff;
-  border: 1px solid #fff;
+  background: #e6eaee;
+  border: 1px solid #e1e1e1;
   border-radius: 5px;
   padding: 10px;
   margin: 10px;
@@ -129,8 +129,8 @@ button:disabled {
 .chat__sidebar li:last-child {
   animation: animateElement linear .3s;
   animation-iteration-count: 1;
-  background: #fff;
-  border: 1px solid #fff;
+  background: #e6eaee;
+  border: 1px solid #e1e1e1;
   border-radius: 5px;
   padding: 10px;
   margin: 10px;

@@ -105,6 +105,7 @@ $('#message-form').submit(function (event) {
 
 	var messageTextbox = $('[name="message"]');
 	socket.emit('createMessage', {
+		from: 'User',
 		text: messageTextbox.val(), // We select via input attribute
 	}, function () {  // Aknowledgement 
 		messageTextbox.val('');
