@@ -14,28 +14,44 @@ ul, li {
 h3 {
   font-weight: 600;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 2rem;
+}
+
+#instant {
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: 100;
+  text-align: center;
+  font-size: 1rem;
 }
 
 button {
+  border-radius: 3px;
   border: none;
-  background: #265f82;
+  background: #02b3e4;
   color: white;
   cursor: pointer;
   padding: 10px;
-  transition: background .3s ease;
+  transition: background .3s ease, box-shadow .3s;
+  box-shadow: 8px 10px 7px rgba(0, 0, 0, 0.1);
 }
 
 button:hover {
   border: none;
-  background: #1F4C69;
+  background: #02abda;
   color: white;
   padding: 10px;
+  box-shadow: 5px 5px 2px rgba(0, 0, 0, 0.1);
 }
 
 button:disabled {
   cursor: default;
   background: #698ea5;
+}
+
+#rocket {
+  margin: auto;
+  display: block;
+  color: #7F00FF
 }
 
 .centered-form {
@@ -44,12 +60,10 @@ button:disabled {
   height: 100vh;
   width: 100vw;
   justify-content: center;
-  background: -moz-linear-gradient(125deg, rgba(39,107,130,1) 0%, rgba(49,84,129,1) 100%); /* ff3.6+ */
-  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, rgba(49,84,129,1)), color-stop(100%, rgba(39,107,130,1))); /* safari4+,chrome */
-  background: -webkit-linear-gradient(125deg, rgba(39,107,130,1) 0%, rgba(49,84,129,1) 100%); /* safari5.1+,chrome10+ */
-  background: -o-linear-gradient(125deg, rgba(39,107,130,1) 0%, rgba(49,84,129,1) 100%); /* opera 11.10+ */
-  background: -ms-linear-gradient(125deg, rgba(39,107,130,1) 0%, rgba(49,84,129,1) 100%); /* ie10+ */
-  background: linear-gradient(325deg, rgba(39,107,130,1) 0%, rgba(49,84,129,1) 100%); /* w3c */
+  background: #7F00FF;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #ff008d, #7F00FF);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #ff008d, #7F00FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 
 .centered-form__form {
@@ -58,7 +72,7 @@ button:disabled {
   border-radius: 5px;
   padding: 0px 20px;
   margin: 20px;
-  width: 230px;
+  width: 300px;
 }
 
 .form-field {
@@ -87,16 +101,14 @@ button:disabled {
   overflow-y: scroll;
   width: 260px;
   height: 100vh;
-  background: -moz-linear-gradient(125deg, rgba(39,107,130,1) 0%, rgba(49,84,129,1) 100%); /* ff3.6+ */
-  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, rgba(49,84,129,1)), color-stop(100%, rgba(39,107,130,1))); /* safari4+,chrome */
-  background: -webkit-linear-gradient(125deg, rgba(39,107,130,1) 0%, rgba(49,84,129,1) 100%); /* safari5.1+,chrome10+ */
-  background: -o-linear-gradient(125deg, rgba(39,107,130,1) 0%, rgba(49,84,129,1) 100%); /* opera 11.10+ */
-  background: -ms-linear-gradient(125deg, rgba(39,107,130,1) 0%, rgba(49,84,129,1) 100%); /* ie10+ */
-  background: linear-gradient(325deg, rgba(39,107,130,1) 0%, rgba(49,84,129,1) 100%); /* w3c */
+  background: #7F00FF;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #E100FF, #7F00FF);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #E100FF, #7F00FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 
 .chat__sidebar h3 {
-  color: #e6eaee;
+  color: #fff;
   margin: 10px 20px;
   text-align: left;
 }
@@ -149,8 +161,14 @@ button:disabled {
   flex-grow: 1;
 }
 
+input { 
+  transition: border 0.3s ease-in-out;
+  outline: none;
+  border-radius: 2px;
+}
+
 input:focus { 
-    outline: 1px solid #265e81;
+  border: 1px solid rgba(81, 203, 238, 1);
 }
 
 .chat__messages {

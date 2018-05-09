@@ -15,29 +15,42 @@ function scrollToBottom () {
 
 	if(clientHeight + scrollTop + newMessageHeight + lastMessageHeight >= scrollHeight) {
 		messages.scrollTop(scrollHeight);
-		console.log(`${clientHeight} + ${scrollTop} + ${newMessageHeight} + ${lastMessageHeight} >= ${scrollHeight} `);
-	} else {
-		console.log(`${clientHeight} + ${scrollTop} + ${newMessageHeight} + ${lastMessageHeight} <= ${scrollHeight} `);
-	};
+	} 
 };
 
 
 
 // Register a BUILT IN "listen event" for a new connection from the client side.
 socket.on('connect', function () { //We dont' pass any argument
-	console.log('Connected to server');
+	var urlParams = window.location.search;
 
 // Register a BUILT IN "emit event" when the client creates data.
-	// socket.emit('createMessage', {
-	// 	from: 'Mara',
-	// 	text: 'Yes i am available!',
-	// });
+	socket.emit('join', urlParams, function (err) {
+		if(err) {
+			alert(err);
+			window.location.href = '/';
+
+		} else {
+			console.log('No error');
+		}
+	});
 });
 
 // Register a BUILT IN "listen event" when server is down.
 socket.on('disconnect', function () {
 	console.log('Disconnected from server');
 });
+
+
+//New listener for userlist display on side
+socket.on('updateUserList', function(user) {
+	var ol = $('<ol></ol>').fadeIn();
+	user.forEach(function (user) {
+		ol.append($('<li></li>').text(user));
+	});
+	$('#users').html(ol);
+});
+
 
 //Register a custom 'listen event' when server sends data
 socket.on('newMessage', function (message) {

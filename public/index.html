@@ -5,6 +5,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 		<title>Join to InstaChat</title>
+		<script src="/js/libs/fontawesome-all.min.js"></script>
 		<link rel="stylesheet" href="/css/styles.css">
 	</head>
 
@@ -14,17 +15,22 @@
 			
 			<form action="/chat.html">
 				<div class="form-field">
-					<h3>Welcome to InstaChat</h3>
+					<h3>RocketChat</h3>
+					<p id="instant">Comminucate NOW!</p>
+				</div>
+
+				<div class="form-field">
+					<i id="rocket" class="fab fa-rocketchat fa-5x"></i>
 				</div>
 
 				<div class="form-field">
 					<label>Nickname</label>
-					<input type="text" name="name" autofocus/>
+					<input type="text" name="name" autofocus placeholder="John Doe" />
 				</div>
 
 				<div class="form-field">
-					<label>Create your channel</label>
-					<input type="text" name="room"/>
+					<label>Create or use your channel</label>
+					<input type="text" name="room" placeholder="Workspace"/>
 				</div>
 
 				<div class="form-field">
